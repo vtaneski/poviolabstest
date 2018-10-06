@@ -1,36 +1,20 @@
 import React, { Component } from 'react';
+import { observer } from 'mobx-react';
 import './CurrencyList.css';
 
+@observer
 class CurrencyList extends Component {
 
-    constructor() {
-        super();
-        this.state = {
-            data: []
-        };
-    }
-
-    fetchData() {
-        // sorted by rank
-        // format - array
-        fetch('https://api.coinmarketcap.com/v2/ticker/?sort=rank&structure=array')
-            .then(results => results.json())
-            .then(newData => this.setState({ data: newData.data }));
-    }
-
     componentDidMount() {
-        this.fetchData();
+        this.props.listState.fetchData();
     }
 
     onRefresh = () => {
-        this.fetchData();
-    }
-
-    onClick() {
-        alert("Clicked: ");
+        this.props.listState.fetchData();
     }
 
     render() {
+        const state = this.props.listState;
         return (
             <div>
                 <button onClick={this.onRefresh}>Refresh</button>
@@ -44,19 +28,8 @@ class CurrencyList extends Component {
                             <td>24h change</td>
                             <td></td>
                         </tr>
-                        {this.state.data.map(item => {
-
-                            return (
-                                <tr key={item.id}>
-                                    <td>{item.name}</td>
-                                    <td>{item.rank}</td>
-                                    <td>{item.symbol}</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><button onClick={this.onClick}>Details</button></td>
-                                </tr>
-                            )
-                        })}
+                        {state.list.map(item => <CurrencyItem item={ item } state={ state }  />                            
+                        )}
                     </tbody>
                 </table>
             </div>
@@ -65,3 +38,28 @@ class CurrencyList extends Component {
 }
 
 export default CurrencyList;
+
+@observer
+class CurrencyItem extends Component {
+
+    onClick = () => {
+        const selectedCurrencyId = this.props.item.id;
+        console.log("Selected id: " + selectedCurrencyId);
+        this.props.state.fetchCurrencyData(selectedCurrencyId);
+    }
+
+    render() {
+        const item = this.props.item;
+
+        return (
+            <tr key={item.id}>
+                <td>{item.name}</td>
+                <td>{item.rank}</td>
+                <td>{item.symbol}</td>
+                <td></td>
+                <td></td>
+                <td><button onClick={this.onClick}>Details</button></td>
+            </tr>
+        )
+    }
+}
