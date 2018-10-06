@@ -14,6 +14,10 @@ tr:nth-child(even) {
     background-color: #f2f2f2
 }
 
-tr.click{
+tr.click {
     cursor: pointer;
+}
+
+div.refresh {
+   text-align: right; 
 }

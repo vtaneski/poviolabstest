@@ -17,7 +17,9 @@ class CurrencyList extends Component {
         const state = this.props.listState;
         return (
             <div>
-                <button onClick={this.onRefresh}>Refresh</button>
+                <div class="refresh">
+                    <button onClick={this.onRefresh}>Refresh</button>
+                </div>
                 <table>
                     <tbody>
                         <tr>
@@ -28,7 +30,7 @@ class CurrencyList extends Component {
                             <td>24h change</td>
                             <td></td>
                         </tr>
-                        {state.list.map(item => <CurrencyItem item={ item } state={ state }  />                            
+                        {state.list.map(item => <CurrencyItem item={item} state={state} key={item.id} />
                         )}
                     </tbody>
                 </table>
@@ -44,7 +46,6 @@ class CurrencyItem extends Component {
 
     onClick = () => {
         const selectedCurrencyId = this.props.item.id;
-        console.log("Selected id: " + selectedCurrencyId);
         this.props.state.fetchCurrencyData(selectedCurrencyId);
     }
 

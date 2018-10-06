@@ -7,7 +7,6 @@ class CurrencyState {
     fetchData() {
         // sorted by rank
         // format - array
-        console.log("Fetching data");
         fetch('https://api.coinmarketcap.com/v2/ticker/?sort=rank&structure=array')
             .then(results => results.json())
             .then(newData => this.list = newData.data); //BOLJŠI NAČIN????
@@ -15,15 +14,11 @@ class CurrencyState {
     }
 
     fetchCurrencyData(id) {
-        console.log("Fetching curency data");
         // retreiving data for selected currency
         fetch('https://api.coinmarketcap.com/v2/ticker/' + id + '/')
             .then(results => results.json())
             .then(selectedItem => {
                 this.selectedCurrency = Object.assign({}, selectedItem.data);
-                console.log(selectedItem.data);
-                console.log(this.selectedCurrency.id);
-
 
                 // POPRAVI ALI PRESTAVI USTREZNO
                 alert(
