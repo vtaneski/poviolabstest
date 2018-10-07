@@ -4,6 +4,7 @@ class CurrencyState {
     @observable list = [];
     @observable selectedCurrency = {};
     @observable fiatCurrency = "USD";
+    newFiatCurrencySet = false;
 
     getSelectedItem = (id) => {
         return this.list.filter(

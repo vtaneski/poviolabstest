@@ -7,7 +7,9 @@ import './CurrencyList.css';
 class CurrencyList extends Component {
 
     componentDidMount() {
-        this.props.listState.fetchData();
+        if (this.props.listState.newFiatCurrencySet) {
+            this.props.listState.fetchData();
+        }
     }
 
     onRefresh = () => {
@@ -16,7 +18,7 @@ class CurrencyList extends Component {
 
     render() {
         const state = this.props.listState;
-        const fiatCurrency = this.props.listState.fiatCurrency;
+        const fiatCurrency = state.fiatCurrency;
         console.log("Home render");
 
         return (
@@ -58,16 +60,13 @@ class CurrencyItem extends Component {
         const fiatCurrency = this.props.state.fiatCurrency;
         const quotes = item.quotes[fiatCurrency];
 
-        console.log("Home render " + fiatCurrency);
-
-
         return (
             <tr key={item.id}>
                 <td>{item.name}</td>
                 <td>{item.rank}</td>
                 <td>{item.symbol}</td>
                 <td>{quotes.price}</td>
-                <td></td>
+                <td>{quotes.percent_change_24h}</td>
                 <td>
                     <Link
                         to={{

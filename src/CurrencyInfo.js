@@ -5,6 +5,13 @@ import './CurrencyList.css';
 @observer
 class CurrencyInfo extends Component {
 
+    /*constructor(props) {
+        super(props);
+        console.log("Did mount");
+        const currencyId = parseInt(props.match.params.id);
+        props.listState.fetchCurrencyData(currencyId);
+    }*/
+
     onRefresh = () => {
         console.log("Refreshing...");
         // retrieve data for specific item
@@ -27,6 +34,9 @@ class CurrencyInfo extends Component {
             selectedCurrency = this.props.listState.getSelectedItem(currencyId)[0]
         }
 
+        const fiatCurrency = state.fiatCurrency;
+        const quotes = selectedCurrency.quotes[fiatCurrency];
+
         console.log("Refreshed!");
                  
         return (
@@ -40,7 +50,7 @@ class CurrencyInfo extends Component {
                             <td>Rank</td>
                             <td>Name</td>
                             <td>Symbol</td>
-                            <td>Price</td>
+                            <td>Price ({fiatCurrency})</td>
                             <td>1h change</td>
                             <td>24h change</td>
                             <td>7d change</td>
@@ -51,10 +61,10 @@ class CurrencyInfo extends Component {
                             <td>{selectedCurrency.rank}</td>
                             <td>{selectedCurrency.name}</td>
                             <td>{selectedCurrency.symbol}</td>
-                            <td>{selectedCurrency.quotes.USD.price}</td>
-                            <td>{selectedCurrency.quotes.USD.percent_change_1h}</td>
-                            <td>{selectedCurrency.quotes.USD.percent_change_24h}</td>
-                            <td>{selectedCurrency.quotes.USD.percent_change_7d}</td>
+                            <td>{quotes.price}</td>
+                            <td>{quotes.percent_change_1h}</td>
+                            <td>{quotes.percent_change_24h}</td>
+                            <td>{quotes.percent_change_7d}</td>
                             <td>{selectedCurrency.total_supply}</td>
                             <td>{selectedCurrency.circulating_supply}</td>
                         </tr>
