@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import CurrencyList from './CurrencyList';
 import CurrencyState from './CurrencyState';
+import CurrencyInfo from './CurrencyInfo';
 import Settings from './Settings';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
@@ -20,8 +21,9 @@ class App extends Component {
               <Link to="/settings"><button>Settings</button></Link>
           </div>
 
-          <Route exact path="/" component={(props) => <CurrencyList {...props} listState={currencyState} />} />
-          <Route path="/settings" component={Settings} />
+          <Route exact path="/" render={(props) => <CurrencyList {...props} listState={currencyState} />} />
+          <Route path="/currencyinfo/:id" render={(props) => <CurrencyInfo {...props} listState={currencyState} />} />
+          <Route path="/settings" render={(props) => <Settings {...props} listState={currencyState} />} />
 
         </div>
       </Router>

@@ -3,35 +3,33 @@ import { observable } from 'mobx';
 class CurrencyState {
     @observable list = [];
     @observable selectedCurrency = {};
+    @observable fiatCurrency = "USD";
+
+    getSelectedItem = (id) => {
+        return this.list.filter(
+            item => item.id === id
+        );
+    }
 
     fetchData() {
         // sorted by rank
         // format - array
-        fetch('https://api.coinmarketcap.com/v2/ticker/?sort=rank&structure=array')
+        // fiat currency
+        console.log("Retreiving data");
+        fetch('https://api.coinmarketcap.com/v2/ticker/?sort=rank&structure=array&convert=' + this.fiatCurrency)
             .then(results => results.json())
-            .then(newData => this.list = newData.data); //BOLJŠI NAČIN????
-        //.then(newData => this.list = Object.assign({}, newData.data));
+            .then(newData => this.list = newData.data);
     }
 
     fetchCurrencyData(id) {
         // retreiving data for selected currency
-        fetch('https://api.coinmarketcap.com/v2/ticker/' + id + '/')
+        console.log("Retreiving data for selected currency with id: " + id);
+        fetch('https://api.coinmarketcap.com/v2/ticker/' + id + '/?convert=' + this.fiatCurrency)
             .then(results => results.json())
             .then(selectedItem => {
-                this.selectedCurrency = Object.assign({}, selectedItem.data);
-
-                // POPRAVI ALI PRESTAVI USTREZNO
-                alert(
-                    "Rank: " + this.selectedCurrency.rank + "\n" +
-                    "Name: " + this.selectedCurrency.name + "\n" +
-                    "Symbol: " + this.selectedCurrency.symbol + "\n" +
-                    "Price: " + this.selectedCurrency.quotes.USD.price + "\n" +
-                    "1h change: " + this.selectedCurrency.quotes.USD.percent_change_1h + "\n" +
-                    "24h change: " + this.selectedCurrency.quotes.USD.percent_change_24h + "\n" +
-                    "7d change: " + this.selectedCurrency.quotes.USD.percent_change_7d + "\n" +
-                    "Total supply: " + this.selectedCurrency.total_supply + "\n" +
-                    "Available supply: " + this.selectedCurrency.circulating_supply + "\n"
-                );
+                console.log("Updating state");
+                this.selectedCurrency = selectedItem.data;
+                console.log("Done fetching!");
             });        
     }
 }
