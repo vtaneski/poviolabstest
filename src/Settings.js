@@ -21,8 +21,8 @@ class Settings extends Component {
     }
 
     render() {
-        const oldState = this.props.listState;  
-        console.log("Rendered: " + oldState.fiatCurrency);
+        const state = this.props.listState;  
+        console.log("Rendered: " + state.fiatCurrency);
         return (
             <div>
                 <p>Select currency:</p>

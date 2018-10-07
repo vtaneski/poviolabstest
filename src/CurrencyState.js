@@ -16,7 +16,7 @@ class CurrencyState {
         // sorted by rank
         // format - array
         // fiat currency
-        console.log("Retreiving data");
+        console.log("Retrieving data");
         fetch('https://api.coinmarketcap.com/v2/ticker/?sort=rank&structure=array&convert=' + this.fiatCurrency)
             .then(results => results.json())
             .then(newData => this.list = newData.data);
@@ -24,7 +24,7 @@ class CurrencyState {
 
     fetchCurrencyData(id) {
         // retreiving data for selected currency
-        console.log("Retreiving data for selected currency with id: " + id);
+        console.log("Retrieving data for selected currency with id: " + id);
         fetch('https://api.coinmarketcap.com/v2/ticker/' + id + '/?convert=' + this.fiatCurrency)
             .then(results => results.json())
             .then(selectedItem => {

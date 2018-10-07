@@ -19,11 +19,10 @@ class CurrencyList extends Component {
     render() {
         const state = this.props.listState;
         const fiatCurrency = state.fiatCurrency;
-        console.log("Home render");
-
+        
         return (
             <div>
-                <div class="refresh">
+                <div className="refresh">
                     <button onClick={this.onRefresh}>Refresh</button>
                 </div>
                 <table>

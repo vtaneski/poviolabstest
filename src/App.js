@@ -23,7 +23,7 @@ class App extends Component {
           </div>
 
           <Route exact path="/" render={(props) => <CurrencyList {...props} listState={currencyState} />} />
-          <Route path="/currencyinfo/:id" component={(props) => <CurrencyInfo {...props} listState={currencyState} />} />
+          <Route path="/currencyinfo/:id" render={(props) => <CurrencyInfo {...props} listState={currencyState} />} />
           <Route path="/settings" render={(props) => <Settings {...props} listState={currencyState} />} />
 
         </div>

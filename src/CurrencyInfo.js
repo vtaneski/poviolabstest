@@ -25,7 +25,7 @@ class CurrencyInfo extends Component {
         const state = this.props.listState;  
         var selectedCurrency = {}; 
 
-        if (state.selectedCurrency.name !== undefined) {
+        if (state.selectedCurrency!== null && state.selectedCurrency.name !== undefined) {
             console.log("Selected currency already set");
             selectedCurrency = Object.assign({}, state.selectedCurrency);
         } else {
@@ -41,7 +41,7 @@ class CurrencyInfo extends Component {
                  
         return (
             <div>
-                <div class="refresh">
+                <div className="refresh">
                     <button onClick={this.onRefresh}>Refresh</button>
                 </div>
                 <table>
