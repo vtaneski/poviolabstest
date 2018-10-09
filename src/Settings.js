@@ -14,14 +14,16 @@ class Settings extends Component {
             state.fiatCurrency = newFiatCurrency;
             state.newFiatCurrencySet = true;
             state.fetchData();
-            state.fetchCurrencyData(state.selectedCurrency.id);
+            if (state.selectedCurrency !== null && state.selectedCurrency !== undefined) {
+                state.fetchCurrencyData(state.selectedCurrency.id);
+            }
         } else {
             state.newFiatCurrencySet = false;
         }
     }
 
     render() {
-        const state = this.props.listState;  
+        const state = this.props.listState;
         console.log("Rendered: " + state.fiatCurrency);
         return (
             <div>

@@ -5,13 +5,6 @@ import './CurrencyList.css';
 @observer
 class CurrencyInfo extends Component {
 
-    /*constructor(props) {
-        super(props);
-        console.log("Did mount");
-        const currencyId = parseInt(props.match.params.id);
-        props.listState.fetchCurrencyData(currencyId);
-    }*/
-
     onRefresh = () => {
         console.log("Refreshing...");
         // retrieve data for specific item
@@ -30,7 +23,7 @@ class CurrencyInfo extends Component {
             selectedCurrency = Object.assign({}, state.selectedCurrency);
         } else {
             console.log("Selected currency Not set");
-            // read item data from state list
+            // read item data from already downloaded state list
             selectedCurrency = this.props.listState.getSelectedItem(currencyId)[0]
         }
 
