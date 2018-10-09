@@ -26,7 +26,7 @@ class Settings extends Component {
         return (
             <div>
                 <p>Select currency:</p>
-                <select name="fiatCurrency" onChange={this.onChange}>
+                <select name="fiatCurrency" id="fiatCurrency" onChange={this.onChange}>
                     <option>-- select currency --</option>
                     <option value="USD">USD</option>
                     <option value="EUR">EUR</option>

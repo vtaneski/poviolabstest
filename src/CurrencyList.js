@@ -13,6 +13,7 @@ class CurrencyList extends Component {
     }
 
     onRefresh = () => {
+        console.log("Refresh button clicked");
         this.props.listState.fetchData();
     }
 
